@@ -2,41 +2,41 @@ class Drone {
   constructor() {
     this.xAxis = 0;
     this.yAxis = 0;
-    this.compassDirection = "N";
+    this.compassDirection = "North";
     this.coordinateHistory = [];
   
     this.droneDirection = input => {
       let directions = input.split("");
-      if (this.compassDirection === "N" && directions[0] === "R") {
-        return (this.compassDirection = "E");
+      if (this.compassDirection === "North" && directions[0] === "R") {
+        return (this.compassDirection = "East");
       }
-      if (this.compassDirection === "E" && directions[0] === "R") {
-        return (this.compassDirection = "S");
+      if (this.compassDirection === "East" && directions[0] === "R") {
+        return (this.compassDirection = "South");
       }
-      if (this.compassDirection === "S" && directions[0] === "R") {
-        return (this.compassDirection = "W");
+      if (this.compassDirection === "South" && directions[0] === "R") {
+        return (this.compassDirection = "West");
       }
-      if (this.compassDirection === "W" && directions[0] === "R") {
-        return (this.compassDirection = "N");
+      if (this.compassDirection === "West" && directions[0] === "R") {
+        return (this.compassDirection = "North");
       }
-      if (this.compassDirection === "N" && directions[0] === "L") {
-        return (this.compassDirection = "W");
+      if (this.compassDirection === "North" && directions[0] === "L") {
+        return (this.compassDirection = "West");
       }
-      if (this.compassDirection === "W" && directions[0] === "L") {
-        return (this.compassDirection = "S");
+      if (this.compassDirection === "West" && directions[0] === "L") {
+        return (this.compassDirection = "South");
       }
-      if (this.compassDirection === "S" && directions[0] === "L") {
-        return (this.compassDirection = "E");
+      if (this.compassDirection === "South" && directions[0] === "L") {
+        return (this.compassDirection = "East");
       }
-      if (this.compassDirection === "E" && directions[0] === "L") {
-        return (this.compassDirection = "N");
+      if (this.compassDirection === "East" && directions[0] === "L") {
+        return (this.compassDirection = "North");
       }
     };
   
     this.droneInput = input => {
       this.droneDirection(input);
       let directions = input.split("");
-      if (this.compassDirection === "N") {
+      if (this.compassDirection === "North") {
         if (
           directions[0] === "R" || directions[0] === "L"
         ) {
@@ -50,7 +50,7 @@ class Drone {
           });
         }
       }
-      if (this.compassDirection === "E") {
+      if (this.compassDirection === "East") {
         if (
           directions[0] === "R" || directions[0] === "L"
         ) {
@@ -64,10 +64,9 @@ class Drone {
           });
         }
       }
-      if (this.compassDirection === "S") {
+      if (this.compassDirection === "South") {
         if (
-          directions[0] === "R" ||
-          directions[0] === "L"
+          directions[0] === "R" || directions[0] === "L"
         ) {
           directions.map(char => {
             if (char === "+") {
@@ -79,10 +78,9 @@ class Drone {
           });
         }
       }
-      if (this.compassDirection === "W") {
+      if (this.compassDirection === "West") {
         if (
-          directions[0] === "R" ||
-          directions[0] === "L"
+          directions[0] === "R" || directions[0] === "L"
         ) {
           directions.map(char => {
             if (char === "+") {
@@ -93,31 +91,12 @@ class Drone {
             }
           });
         }
-      }
-    };
-  
-    this.showDirection = () => {
-      switch (this.compassDirection) {
-        case "N":
-          console.log("The drone is currently facing North");
-          break;
-        case "E":
-          console.log("The drone is currently facing East");
-          break;
-        case "S":
-          console.log("The drone is currently facing South");
-          break;
-        case "W":
-          console.log("The drone is currently facing West");
-          break;
-        default:
-          console.log("Something has gone wrong!");
       }
     };
   
     this.showLocation = () =>
       console.log(
-        `My end location is: (${String(this.xAxis)},${String(this.yAxis)}). Where shall I go now?`
+        `My end location is: (${String(this.xAxis)},${String(this.yAxis)}).`
       );
   }
 };

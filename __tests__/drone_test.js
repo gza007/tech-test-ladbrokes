@@ -6,7 +6,7 @@ describe("The Drone Constructor", () => {
   });
   it("Has a starting compass direction of North", () => {
     const drone = new Drone();
-    expect(drone.compassDirection).toBe("N");
+    expect(drone.compassDirection).toBe("North");
   });
   it("Has a starting X-axis co-ordinate of 0", () => {
     const drone = new Drone();
@@ -22,16 +22,16 @@ describe("The Drone Constructor", () => {
   it("can make right turns", () => {
     const drone = new Drone();
     drone.droneInput("R");
-    expect(drone.compassDirection).toBe("E");
+    expect(drone.compassDirection).toBe("East");
     drone.droneInput("R");
-    expect(drone.compassDirection).toBe("S");
+    expect(drone.compassDirection).toBe("South");
   });
   it("can make left turns", () => {
     const drone = new Drone();
     drone.droneInput("L");
-    expect(drone.compassDirection).toBe("W");
+    expect(drone.compassDirection).toBe("West");
     drone.droneInput("L");
-    expect(drone.compassDirection).toBe("S");
+    expect(drone.compassDirection).toBe("South");
   });
 });
 

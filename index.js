@@ -3,13 +3,12 @@ const fs = require("fs");
 const instructions = fs.readFileSync("./problem-basic-input.txt", "utf-8");
 
 function basicDroneInput() {
-  const drone1 = new Drone();
+  const drone = new Drone();
   const instructionsArray = instructions.split(" ");
-
   for (let i = 0; i < instructionsArray.length; i++) {
-    drone1.droneInput(instructionsArray[i]);
+    drone.droneInput(instructionsArray[i]);
   }
-  return drone1.showLocation();
+  return drone.showLocation();
 };
 
 console.log("I have safely arrived!");
