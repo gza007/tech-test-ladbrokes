@@ -38,8 +38,7 @@ class Drone {
       let directions = input.split("");
       if (this.compassDirection === "N") {
         if (
-          directions[0] === "R" ||
-          directions[0] === "L"
+          directions[0] === "R" || directions[0] === "L"
         ) {
           directions.map(char => {
             if (char === "+") {
@@ -53,8 +52,7 @@ class Drone {
       }
       if (this.compassDirection === "E") {
         if (
-          directions[0] === "R" ||
-          directions[0] === "L"
+          directions[0] === "R" || directions[0] === "L"
         ) {
           directions.map(char => {
             if (char === "+") {
@@ -96,11 +94,6 @@ class Drone {
           });
         }
       }
-      //push coordinateHistory into array.
-      this.coordinateHistory = [
-        ...this.coordinateHistory,
-        `${String(this.xAxis)},${String(this.yAxis)}`
-      ];
     };
   
     this.showDirection = () => {
@@ -124,13 +117,8 @@ class Drone {
   
     this.showLocation = () =>
       console.log(
-        `Drone Coordinates: ${String(this.xAxis)},${String(
-          this.yAxis
-        )}`
+        `My end location is: (${String(this.xAxis)},${String(this.yAxis)}). Where shall I go now?`
       );
-  
-    this.showLocationHistory = () =>
-      console.log(`Drone previous coordinates: ${this.coordinateHistory}`);
   }
 };
   

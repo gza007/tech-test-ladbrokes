@@ -1,6 +1,6 @@
 const Drone = require("../src/drone");
 
-describe("Drone Constructor", () => {
+describe("The Drone Constructor", () => {
   it("Can be instanced as an Object", () => {
     expect(new Drone()).toBeInstanceOf(Object);
   });
@@ -8,17 +8,17 @@ describe("Drone Constructor", () => {
     const drone = new Drone();
     expect(drone.compassDirection).toBe("N");
   });
-  it("Has a starting X co-ordinates of 0", () => {
+  it("Has a starting X-axis co-ordinate of 0", () => {
     const drone = new Drone();
     expect(drone.xAxis).toEqual(0);
   });
-  it("Has a starting Y co-ordinates of 0", () => {
+  it("Has a starting Y-axis co-ordinate of 0", () => {
     const drone = new Drone();
     expect(drone.yAxis).toEqual(0);
   });
 })
 
-  describe("Movement", () => {
+  describe("Turns", () => {
   it("can make right turns", () => {
     const drone = new Drone();
     drone.droneInput("R");
@@ -26,12 +26,25 @@ describe("Drone Constructor", () => {
     drone.droneInput("R");
     expect(drone.compassDirection).toBe("S");
   });
-  it("can make a left turn", () => {
+  it("can make left turns", () => {
     const drone = new Drone();
     drone.droneInput("L");
     expect(drone.compassDirection).toBe("W");
     drone.droneInput("L");
     expect(drone.compassDirection).toBe("S");
+  });
+});
+
+describe("Steps", () => {
+  it("can move forwards", () => {
+    const drone = new Drone();
+    drone.droneInput("R+");
+    expect(drone.xAxis).toBe(1);
+  });
+  it("can move backwards", () => {
+    const drone = new Drone();
+    drone.droneInput("L+");
+    expect(drone.xAxis).toBe(-1);
   });
 });
 
