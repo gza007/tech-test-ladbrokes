@@ -1,104 +1,90 @@
+const fs = require("fs");
+const instructions = fs.readFileSync("./problem-basic-input.txt", "utf-8");
+
 class Drone {
   constructor() {
     this.xAxis = 0;
     this.yAxis = 0;
-    this.compassDirection = "North";
-    this.coordinateHistory = [];
+    this.compassDirections = ["North", "East", "South","West"];
+    this.toggleCompassDirection = 0;
   
     this.droneDirection = input => {
       let directions = input.split("");
-      if (this.compassDirection === "North" && directions[0] === "R") {
-        return (this.compassDirection = "East");
+      if (directions[0] === "R") {
+        this.toggleCompassDirection = this.toggleCompassDirection + 1;
+        this.toggleCompassDirection = this.toggleCompassDirection % this.compassDirections.length;
       }
-      if (this.compassDirection === "East" && directions[0] === "R") {
-        return (this.compassDirection = "South");
+      if (directions[0] === "L") {
+        if (this.toggleCompassDirection === 0) {
+          this.toggleCompassDirection = this.compassDirections.length;
+        }
+        this.toggleCompassDirection = this.toggleCompassDirection - 1;
       }
-      if (this.compassDirection === "South" && directions[0] === "R") {
-        return (this.compassDirection = "West");
-      }
-      if (this.compassDirection === "West" && directions[0] === "R") {
-        return (this.compassDirection = "North");
-      }
-      if (this.compassDirection === "North" && directions[0] === "L") {
-        return (this.compassDirection = "West");
-      }
-      if (this.compassDirection === "West" && directions[0] === "L") {
-        return (this.compassDirection = "South");
-      }
-      if (this.compassDirection === "South" && directions[0] === "L") {
-        return (this.compassDirection = "East");
-      }
-      if (this.compassDirection === "East" && directions[0] === "L") {
-        return (this.compassDirection = "North");
-      }
+      return this.compassDirections[this.toggleCompassDirection];
     };
   
     this.droneInput = input => {
       this.droneDirection(input);
       let directions = input.split("");
-      if (this.compassDirection === "North") {
-        if (
-          directions[0] === "R" || directions[0] === "L"
-        ) {
-          directions.map(char => {
-            if (char === "+") {
+      // console.log(directions);
+      if (this.toggleCompassDirection === 0) {
+          directions.map(x => {
+            if (x === "+") {
               return this.yAxis++;
             }
-            if (char === "-") {
+            if (x === "-") {
               return this.yAxis--;
             }
           });
-        }
       }
-      if (this.compassDirection === "East") {
-        if (
-          directions[0] === "R" || directions[0] === "L"
-        ) {
-          directions.map(char => {
-            if (char === "+") {
+      if (this.toggleCompassDirection === 1) {
+          directions.map(x => {
+            if (x === "+") {
               return this.xAxis++;
             }
-            if (char === "-") {
+            if (x === "-") {
               return this.xAxis--;
             }
           });
-        }
       }
-      if (this.compassDirection === "South") {
-        if (
-          directions[0] === "R" || directions[0] === "L"
-        ) {
-          directions.map(char => {
-            if (char === "+") {
+      if (this.toggleCompassDirection === 2) {
+          directions.map(x => {
+            if (x === "+") {
               return this.yAxis--;
             }
-            if (char === "-") {
+            if (x === "-") {
               return this.yAxis++;
             }
           });
-        }
       }
-      if (this.compassDirection === "West") {
-        if (
-          directions[0] === "R" || directions[0] === "L"
-        ) {
-          directions.map(char => {
-            if (char === "+") {
+      if (this.toggleCompassDirection === 3) {
+          directions.map(x => {
+            if (x === "+") {
               return this.xAxis--;
             }
-            if (char === "-") {
+            if (x === "-") {
               return this.xAxis++;
             }
           });
         }
-      }
     };
   
-    this.showLocation = () =>
+    this.endLocation = () =>
       console.log(
-        `My end location is: (${String(this.xAxis)},${String(this.yAxis)}).`
+        `My end location is: (${this.xAxis},${this.yAxis}).`
       );
   }
 };
+
+moveDrone = () => {
+  const drone = new Drone();
+  const instructionsArray = instructions.split(" ");
+  // console.log(instructionsArray) 
+  instructionsArray.map(x => drone.droneInput(x));
+  return drone.endLocation();
+};
+
+console.log("I have safely arrived!");
+moveDrone();
   
-  module.exports = Drone;
+module.exports = Drone;

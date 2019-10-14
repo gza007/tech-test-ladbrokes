@@ -6,7 +6,11 @@ describe("The Drone Constructor", () => {
   });
   it("Has a starting compass direction of North", () => {
     const drone = new Drone();
-    expect(drone.compassDirection).toBe("North");
+    expect(drone.compassDirections[0]).toBe("North");
+  });
+  it("Can toggle compass Directions", () => {
+    const drone = new Drone();
+    expect(drone.compassDirections[3]).toBe("West");
   });
   it("Has a starting X-axis co-ordinate of 0", () => {
     const drone = new Drone();
@@ -22,16 +26,16 @@ describe("The Drone Constructor", () => {
   it("can make right turns", () => {
     const drone = new Drone();
     drone.droneInput("R");
-    expect(drone.compassDirection).toBe("East");
+    expect(drone.compassDirections[drone.toggleCompassDirection]).toBe("East");
     drone.droneInput("R");
-    expect(drone.compassDirection).toBe("South");
+    expect(drone.compassDirections[drone.toggleCompassDirection]).toBe("South");
   });
   it("can make left turns", () => {
     const drone = new Drone();
     drone.droneInput("L");
-    expect(drone.compassDirection).toBe("West");
+    expect(drone.compassDirections[drone.toggleCompassDirection]).toBe("West");
     drone.droneInput("L");
-    expect(drone.compassDirection).toBe("South");
+    expect(drone.compassDirections[drone.toggleCompassDirection]).toBe("South");
   });
 });
 
@@ -53,14 +57,16 @@ describe("Follow Basic Input Directions", () => {
     const drone = new Drone();
     drone.droneInput("R++");
     drone.droneInput("L+++");
-    expect(`${String(drone.xAxis)},${String(drone.yAxis)}`).toBe("2,3");
+    expect(drone.xAxis).toBe(2);
+    expect(drone.yAxis).toBe(3);
   });
   it("Follow basic-input directions - Example 2", () => {
     const drone = new Drone();
     drone.droneInput("L++");
     drone.droneInput("R--");
     drone.droneInput("L+");
-    expect(`${String(drone.xAxis)},${String(drone.yAxis)}`).toBe("-3,-2");
+    expect(drone.xAxis).toBe(-3);
+    expect(drone.yAxis).toBe(-2);
   });
   it("Follow basic directions from scenario.pdf - Further example 1", () => {
     const drone = new Drone();
@@ -69,7 +75,8 @@ describe("Follow Basic Input Directions", () => {
     drone.droneInput("R+");
     drone.droneInput("R--");
     drone.droneInput("L++");
-    expect(`${String(drone.xAxis)},${String(drone.yAxis)}`).toBe("4,0");
+    expect(drone.xAxis).toBe(4);
+    expect(drone.yAxis).toBe(0);
   });
   it("Follow basic directions from scenario.pdf - Further example 2", () => {
     const drone = new Drone();
@@ -81,6 +88,7 @@ describe("Follow Basic Input Directions", () => {
     drone.droneInput("R--");
     drone.droneInput("R-+-");
     drone.droneInput("L+");
-    expect(`${String(drone.xAxis)},${String(drone.yAxis)}`).toBe("-4,-3");
+    expect(drone.xAxis).toBe(-4);
+    expect(drone.yAxis).toBe(-3);
   });
 });
